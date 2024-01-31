@@ -1,0 +1,52 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body{
+    display: flex;
+}
+
+.left{
+    margin-left: 5%;
+    width: 20%;
+    background-color: red;
+}
+
+.left input{
+    margin:30px 10%;
+    width: 80%;
+    height: 30px;
+}
+
+.right{
+    width: 70%;
+}
+
+#bagua-table{
+    width: 100%;
+}
+
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+  }
+
+th {
+    background-color: aqua;
+    padding: 5px;
+}
+  
+td {
+    width: 20px;
+    height: 20px;
+    white-space: nowrap;
+    text-align: center;
+    vertical-align: middle;
+    padding: 5px;
+    background-color: aqua;
+}
+
+.trhov td:hover{
+    background-color: coral;
+}

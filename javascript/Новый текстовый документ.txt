@@ -1,0 +1,1053 @@
+
+Типы областей видимости
+Глобальная область видимости
+Область видимости функции
+Область видимости блока - переменные объявленные с помощью let или const внутри блока имеют область видимост, ограниченную этим блоком
+Правила работы с переменными
+
+1. Все переменные объявлять перед их использованием
+2. Стараться использовать const везде, где это возможно
+3. Внутри функций не изменять переменные с внешних областей видимости
+
+Строгий режим
+'use strict' - запрещает использование необъявленных переменных
+
+TRY/CATCH
+
+try {
+// Выполнение блока кода
+} catch (error) {
+// Этот блок выполняется в случае возникновения ошибок в блоке try
+}
+
+const fnWithError = () => {
+throw new Error('Some error')
+}
+try {
+fnWithError()
+} catch (error) {
+console.error(error)
+console.log(error.message)
+}
+
+console.log('Continue...') - Выполнение кода продолжится
+
+Инструкции
+Это объявление переменной с помощью let
+Выражение - инструкция
+Инструкция - выражение - инструкция не может стать выражением
+Выражение возвращает значение
+Инструкция выполняет действия
+
+Каждую инструкцию обычно заканчивается точку с запятой
+Исключение: Точка с запятой не требуется после блока инструкции
+Пример инструкции
+
+let a;
+
+const b = 5;
+
+if (a > b) {
+console.log('a is larger');
+}
+
+for (let i = 0; i++; i < 5) {
+console.log(i);
+}
+
+if else 
+
+В конце блока инструкций точка с запятой не нужна
+Точку с запятой можно опускать
+
+Выражение может быть инструкцией
+
+Выражения-инструкция
+
+'abc';
+
+a = a + 3;
+
+c = a + b;
+
+d = 'Good ' + 'Evening';
+
+myFunction(c, d);
+
+console.log('Hey');
+
+Инструкция не может быть трансформирована в выражение
+
+Как отличить выражение от инструкции?
+Выражения могут быть использованы как аргументы в вызове функций, инструкции не могут
+
+function myFn(a) {
+console.log(a);
+}
+
+const b = true;
+let c = 10;
+
+myFn(2 + 3) // 5
+myFn(b) // true
+myFn(c = c + 1) // 11
+myFn(c = c + 1;) - Uncaught SyntaxError
+myFn(let d) - Uncaught SyntaxError
+
+Массивы
+Массив - это объект с цифровыми именами свойств
+
+Формат записи массива
+
+const myArray = [1, 2, 3]
+console.log(myArray)
+// [1, 2, 3]
+
+const myArray2 = new Array(1, 2, 3)
+console.log(myArray2)
+// [1, 2, 3]
+
+Создание разных myArray, они будут одинаковы по структуре, но они не копии, у них разные ссылки
+Попробуем их сравнить, оператором
+
+myArray === myArray2 // false
+Получим false вместо true потому что они не одинаковые
+
+Массив vs Объект
+Объект
+const myObject = {
+0: 1,
+1: 2,
+2: 3,
+length: 3
+}
+
+console.log(myObject)
+// {0: 1, 1: 2, 2: 3, length: 3}
+
+Массив
+const myArray = [1, 2, 3]
+console.log(myArray)
+// [1, 2, 3]
+
+Чтение значений массива
+const myArray = [1, true, 'a']
+console.log(myArray) // [1, true, 'a']
+
+console.log(myArray[0]) // 1
+console.log(myArray[1]) // true
+
+console.log(myArray.length) // 3
+
+Вызов свойства с помощью точечной записи
+myArray.0 // Uncaught SyntaxError: Unexpercted number
+Нельзя использовать точечную запись с числами, иначе выйдет ошибка
+Правильней будет использовать квадратные скобки
+myArray[0] // 1
+
+Методы массивов:
+push - вкладываем элемень в конец массива, pop - удаляет последний элемент в массиве, 
+shift - удаляет первый элемент в массиве, unshift - можно добавить элемент в начало массива, 
+forEach - перебирает каждое значение, map - возвращает новый массив
+Функции высшего порядка в массивах
+
+PUSH
+
+const myArray = [1, 2, 3]
+console.log(myArray) // [1, 2, 3]
+
+myArray.push(4)
+
+console.log(myArray) // [1, 2, 3, 4]
+
+myArray.push(true)
+
+console.log(myArray)
+// [1, 2, 3, 4, true]
+
+POP
+
+const myArray = [1, 2, 3]
+console.log(myArray) // [1, 2, 3]
+
+myArray.pop()
+
+console.log(myArray) // [1, 2]
+
+const removedElement = myArray.pop()
+console.log(myArray) // [1]
+console.log(removedElement) // 2
+
+forEach
+
+const myArray = [1, 2, 3]
+console.log(myArray) // [1, 2, 3]
+
+myArray.forEach(el => console.log(el * 2)) - call-back функция, выполнения действия с каждым элементом массива
+
+console.log(myArray) // [1, 2, 3]
+Оригинальный массив не изменился
+
+MAP - популярно для REACT
+
+const myArray = [1, 2, 3]
+console.log(myArray) // [1, 2, 3]
+
+const newArray = myArray.map(el => el * 3)
+
+console.log(newArray) // [3, 6, 9]
+console.log(myArray) // [1, 2, 3]
+Оригинальный массив не изменился
+
+Деструктуризация объектов
+
+const userProfile = {
+name: 'Bogdan',
+commentsQty: 23,
+hasSignedAgreement: false,
+}
+
+Объявление новых переменных и присваивание значение на основе значений свойств объекта
+const { name, commentsQty } = userProfile
+const { hasSignedAgreement } = userProfile
+
+console.log(name) // Bogdan
+console.log(commentsQty) // 23
+
+Деструктуризация массивов
+
+const fruits = ['Apple', 'Banana']
+
+const [fruitOne, fruitTwo] = fruits
+
+console.log(fruitOne) // Apple
+console.log(fruitTwo) // Banana
+
+Деструктуризация в функциях
+
+const userProfile = {
+name: 'Bogdan',
+commentsQty: 23,
+hasSignedAgreement: false,
+}
+
+const userInfo = ({ name, commentsQty }) - деструктуризация параметров => {
+if (!commentsQty) {
+return `User ${name} has no comments`
+}
+return `User ${name} has ${commentsQty} comments`
+}
+
+userInfo(userProfile) // User Bogdan has 23 comments
+
+Условные инструкции
+
+if - если, if ... else - иначе, switch, тернарные операторы
+
+Инструкция if
+
+if (Условие) {
+// Блок кода, выполняемые однократно, если Условие правдиво
+}
+
+let val = 10
+
+if (val > 5) {
+val += 20
+}
+
+console.log(val) // 30
+
+Пример if с оператором отрицания
+
+const person = {
+age: 20
+}
+
+if (!person.name) {
+console.log('Имя не указано')
+// Другие действия в случае, если свойства "name" у объекта "person" нету
+}
+
+!person.name - true
+
+Инструкция if else
+
+if (Условие) {
+// Блок кода выполняемый однократно, если Условие правдиво
+} else {
+// Блок кода выполняемый однократно, если Условие ложно
+Только выполнится один из блоков
+
+let val = 10
+
+if (val < 5) {
+val += 20
+} else {
+val -= 20
+}
+
+console.log(val) // -10
+Сработал только else, ибо if ложно
+
+Инструкция if else if
+
+if (Условие 1) {
+// Блок кола, выполняемый однократно, если условие 1 правдиво
+} else if (Условие 2) {
+// Блок кода, выполняемый однократно, если Условие 2 правдиво
+} else {
+// Блок кода, выполняемый однократно, если предыдущие условия ложны
+}
+
+Предпочтительный формат if
+
+if (Условие 1) {
+// Блок кола, выполняемый однократно, если условие 1 правдиво
+}
+
+if (Условие 2) {
+// Блок кола, выполняемый однократно, если Условие 2 правдиво
+}
+
+if (Условие 3) {
+// Блок кола, выполняемый однократно, если условие 3 правдиво
+}
+
+const age = 20
+
+if (age > 18) {
+    console.log('is debil')
+}
+
+else if (age > 12 && age < 18) {
+    console.log('is molodoy debil')
+}
+
+else {
+    console.log('nothing')
+}
+
+Использование if в функциях
+
+const sumPositiveNumbers = (a, b) => {
+if (typeof a !== 'number' || typeof b !== 'number') {
+return 'One of the arguments is not a number'
+}
+
+if (a <= 0 || b <= 0) {
+return 'Numbers are not positive'
+}
+
+return a + b
+}
+
+Инструкция switch
+Альтернатива if else if
+
+switch (Выражение) {
+case A:
+// Действие если выражение === А        Если выполняется действие
+break                                   то break нас вытталкивает
+case B:
+// Действия если Выражение === B
+break
+default:
+// Действия по умолчанию
+}
+
+Пример
+
+const month = 2
+
+switch (month) {
+case 12:
+console.log('Декабрь')
+break
+case 1:
+console.log('Январь')
+break
+case 2:
+console.log('Февраль')
+break
+default:
+console.log('Это не зимний месяц')
+}
+
+Тернарный оператор
+У тернарного оператора три операнда
+Конструкция с тернарным оператором - выражение
+Выражение возвращает значение (в третий раз написано)
+
+Условие ? Выражение 1 : Выражение 2
+Условие - любое выражение, Выражение 1 - если условие правдиво, тогда возвращается результат Выражения 1
+Выражение 2 - если условие ложно, тогда возвращается результат Выражения 2
+
+Желательно писать так:
+Условие
+? Выражение 1
+: Выражение 2
+
+Пример 1
+
+const value = 11
+
+value
+? console.log('Условие истинно')
+: console.log('Условие ложно')
+
+Пример 2
+
+const value1 = 11
+const value2 = 25
+
+value1 && value2
+? myFunction1(value1, value2)
+: myFunction2()
+
+Пример 3 
+
+let value = 11
+console.log(value >= 0 ? value : -value) // 11
+
+
+value = -5
+const res = value >= 0 ? value : -value
+console.log(res) // 5
+
+Циклы
+
+Без цикла
+
+let i = 0
+console.log(i)
+i++
+console.log(i)
+i++
+console.log(i)
+i++
+console.log(i)
+i++
+console.log(i)
+i++
+
+Перебор всех элементов массива без цикла
+
+const myArray = [true, 'abc', 10]
+
+console.log(myArray[0])
+console.log(myArray[1])
+console.log(myArray[2])
+
+Перебор всех свойств объекта без цикла
+
+const myObject = {
+x: 10,
+y: true,
+z: 'abc'
+}
+
+console.log(myObject.x)
+console.log(myObject.y)
+console.log(myObject.z)
+
+Типы циклов
+for, for ... in ..., while, do ... while, for ... of ...
+
+Цикл for
+for (Начальная инструкция; Условие; Итерационное действие
+// Блок кода, выполняемый на каждой итерации
+}
+
+for (let i = 0; i < 5; i++) {
+console.log(i)
+}
+
+Циклы можно использовать для массивов <-- НЕ РЕКОМЕНДУЕТСЯ
+ИСПОЛЬЗУЙТЕ ФУНКЦИИ ВЫСШЕГО ПОРЯДКА МАССИВОВ - "forEach", "map", "reduce"
+
+Цикл for для массивов
+
+const myArray = ['first', 'second', 'third']
+
+for (let i = 0; i < myArray.length; i++) {
+console.log(myArray[i])
+}
+
+Метод массивов foreach
+
+const myArray = ['first', 'second', 'third']
+
+myArray.forEach((element, index) => {
+console.log(element, index)
+})
+
+// 'first' 0
+// 'second' 1
+// 'third' 2
+
+Цикл while - цикл выполняется пока условие правдиво
+while (Условие) {
+// Блок кода, выполняемый на каждой итерации
+}
+
+let i = 0
+
+while (i < 5) {
+console.log(i)
+i++ - изменение переменной которая влияет на условие
+}
+
+Бесконечный цикл - не нужно допускать
+
+let i = 0
+
+while (i < 5) {
+console.log(i)
+}
+
+Цикл do while - выполнить хотя бы один раз действие
+
+do {
+// Блок кода, выполняемый на каждой итерации
+} while (Условие)
+
+let i = 0
+
+do {
+console.log(i)
+i++
+} while (i < 5)
+
+let i = 10
+
+do {
+console.log(i)
+i++
+} while (i < 5)
+
+Цикл for in - перебирание свойств
+
+for (key in Object) {
+// Действия с каждым свойством объекта
+// Значения свойства - Object[key]
+}
+
+for in для объектов
+
+const myObject = {
+x: 10,
+y: true,
+z: 'abc'
+}
+
+for (const key in myObject) {
+console.log(key, myObject[key])
+}
+
+foreach для объектов
+
+const myObject = {
+x: 10,
+y: true,
+z: 'abc'
+}
+
+Object.keys(myObject).forEach(key => {
+console.log(key, myObject[key])
+})
+
+const myObject = {
+x: 10,
+y: true,
+z: 'abc'
+}
+
+Object.values(myObject).forEach(value => {
+console.log(value)
+})
+
+Object.value - это массив значений свойств
+Object.key - это массив свойств
+
+for in для массивов
+
+const myArray = [true, 10, 'abc', null]
+
+for (const key in myArray) {
+console.log(myArray[key])
+}
+
+Цикл for of
+
+for (Element of Iterable) {
+// Действия с определенным элементом
+}
+
+for of для строк - перебирание каждого символа
+
+const myString = 'Hey'
+
+for (const letter of myString) {
+console.log(letter)
+}
+
+for of для массивов
+
+const myArray = [true, 10, 'abc', null]
+
+for (const element of myArray) {
+console.log(element)
+}
+
+const myArray = [true, 10, 'abc', null]
+
+myArray.forEach(element => {
+console.log(element)
+})
+
+// true
+// 10
+// 'abc'
+// null
+
+for of не для объектов
+
+let myObject = {
+x: 10,
+y: true,
+z: 'abc'
+}
+
+for (const prop of myObject) {
+console.log(prop)
+}
+ПОЛУЧИМ ОШИБКУ
+
+Модули
+Модули позволяют структурировать код
+Модули позволяют избегать дублирования блоков кода
+
+export/import синтаксис появился в ES6
+
+moduleOne.js
+export ...
+
+moduleTwo.js
+
+import ...
+
+Экспорт по умолчанию
+
+moduleOne.js
+
+const myName = () => {
+console.log('Bogdan')
+}
+
+export default myName
+
+moduleTwo.js
+
+import printMyName from './moduleOne.js'
+
+printMyName() // Bogdan
+
+с помощью default можно экспортировать переменную (myName) и поменять имя при импорте в другом модуле (printMyName)
+
+Создание и запуск модулей с помощью Node
+
+Открыли папку, создали внутри два файла moduleOne.js и moduleTwo.js. Для модулей другое значение - это .mjs
+
+Работа с терминалом
+
+ls - это каталог всех файлов
+
+node moduleTwo.mjs - это активация модуля и выполнения кода в нем
+
+Несколько экспортов
+
+moduleOne.mjs
+const one = 1
+const two = 'two'
+
+export {
+one,
+two
+}
+
+moduleTwo.js
+
+import {
+one,
+two
+} from './moduleOne.js'
+
+console.log(one) // 1
+console.log(two) // 'two'
+
+Переименование импортов
+
+moduleOne.js
+const one = 1
+const two = 'two'
+
+export { one, two }
+
+moduleTwo.js
+
+import {
+one as oneRenamed,
+two
+} from './moduleOne.js'
+
+console.log(oneRenamed) // 1
+console.log(two) // 'two'
+
+Node.JS поддерживает ES6 модули, начиная с версии 13
+
+Правила работы с модулями
+
+1. Модули должны быть одноцелевыми
+2. Располагайте все export инструкции внизу файла
+3. Располагайте все import инструкции сверху файла
+4. По возможности используйте export default
+
+Примеры
+one.mjs
+
+const sum = (a, b) => a + b
+
+const mult = (a, b) => a * b
+
+export { sum,
+mult }
+
+two.mjs
+
+import { sum, mult as multNumbers } from './moduleOne.mjs'
+
+console.log(sum(10, 2))
+console.log(multNumbers(10, 2))
+
+Как используются модули в React
+
+Терминал
+npx create-react-app my-app
+Создается папка с реактом со множеством файлов, с разными экспортами и импортами, не только на наши файлы, но и внешние пакеты
+
+Классы и прототипы
+
+Синтаксис классов появился в ES6
+
+class ...
+
+Классы позволяют создавать прототипы для объектов
+На основании прототипов создаются экземпляры
+Экземпляры могут иметь собственные свойства и методы
+Экземпляры наследуют свойства и методы прототипов
+
+Пример класса
+
+class Comment {
+constructor(text) {
+this.text = text
+this.votesQty = 0
+}
+
+upvote() {
+this.votesQty +=1
+}
+}
+
+this - указывает на экземпляр класса
+
+Создание экземпляра
+
+const firstComment = new Comment('First comment')
+
+new - вызывается функция constructor
+
+Цепочка прототипов
+
+firstComment --> Comment --> Object
+
+Проверка принадлежности
+
+class Comment {
+constructor(text) {
+this.text = text
+this.votesQty = 0
+}
+
+upvote() {
+this.votesQty += 1
+}
+}
+
+const firstComment = new Comment('First comment')
+
+firstComment instanceof Comment // true
+firstComment instanceof Object // true
+
+Вызов методов
+
+firstComment.upvote()
+console.log(firstComment.votesQty) // 1
+firstComment.upvote()
+console.log(firstComment.votesQty) // 2
+Методы можно вызывать многократно
+
+Проверка принадлежности свойств экземпляру объекта
+
+const firstComment = new Comment('First comment')
+
+firstComment.hasOwnProperty('text') // true
+firstComment.hasOwnProperty('votesQty') // true
+firstComment.hasOwnProperty('upvote') // false
+firstComment.hasOwnProperty('hasOwnProperty') // false
+
+Создание нескольких экземпляров
+
+class Comment {
+constructor(text) {
+this.text = text
+this.votesQty = 0
+}
+
+upvote() {
+this.votesQty += 1
+}
+}
+
+const firstComment = new Comment('First comment')
+const secondComment = new Comment('Second comment')
+const thirdComment = new Comment('Third comment')
+
+Статические методы
+static
+
+static mergeComments(first, second) {
+return `${first} ${second}`
+}
+}
+
+Comment.mergeComments('First comment.', 'Second comment.') - Метод доступен как свойство класса и
+не наследуется экземплярами класса
+
+Расширения других классов
+
+class NumbersArray extends Array {
+sum() {
+return this.reduce((el, acc) => acc += el, 0)
+}
+}
+
+const myArray = new NumbersArray(2, 5, 7)
+
+console.log(myArray)
+myArray.sum()
+
+РАЗОБРАТЬСЯ С REDUCE
+
+Цепочка прототипов
+
+myArray --> NumbersArray --> Array --> Object
+
+Что же такое прототип?
+
+Скрытое свойство - _proto_ - с помощью этого свойства создается цепочка прототипов, лучше не менять
+Строки и числа ведут себя как объект
+
+Промисы
+Позволяют обрабатывать отложенные во времени события
+Промис - это обещание предоставить результат позже
+Промис может вернуть ошибку если результат предоставить невозможно
+
+Состояния промиса
+Когда только создается - ожидание
+Вернул какой-то результат - исполнен
+Возникла ошибка - отклонен
+
+Создание промиса
+
+const myPromise = new Promise((resolve, reject) => {
+/**
+* Выполнение асинхронных действий
+*
+* Внутри этой функции нужно в результате вызвать одну из функций resolve или reject
+*/
+});
+
+Вновь созданный промис будет в состоянии pending
+
+resolve - результат
+reject - ошибка
+
+Получение результата промиса
+
+myPromise
+.then(value => {
+/**
+* Действия в случае успешного исполнения Промиса
+* Значение value - это значение, переданное в вызове функции resolve внутри Промиса
+*/
+})
+.catch(error => {
+/**
+* Действия в случае отклонения Промиса
+* Значение error - это значение, переданное в вызове функции reject внутри Промиса
+*/
+})
+
+Получение данных с помощью Fetch API
+
+fetch('https://jsonplaceholder.typicode.com/todos')
+.then(response => response.json()) - если промис будет исполнен, метод json возвращает промис
+.then(json => console.log(json))
+.catch(error => console.error(error))
+
+Пример
+
+const getData = (url) =>
+new Promise((resolve, reject) =>
+fetch(url)
+.then(response => response.json())
+.then(json => resolve(json))
+.catch(error => reject(error))
+)
+
+getData('https://jsonplaceholder.typicode.com/todos')
+.then(data => console.log(data)) - будет указывать на resolve (результата)
+.catch(error => console.log(error.message)) - будет указывать на reject (ошибки)
+
+ASYNC/AWAIT
+Специальный синтаксис для упрощения работы с промисами
+
+Асинхронная функция
+async function asyncFn() {
+// Всегда возвращает Промис
+}
+
+const asyncFn = async () => {
+// Всегда возвращает Промис
+}
+
+Пример 1
+
+const asyncFn = async () => {
+return 'Success!'
+}
+
+asyncFn()
+
+Продолжение примера 1
+
+.then(value => console.log(value))
+
+Пример 2
+
+const asyncFn = async () => {
+throw new Error('There wan an error!')
+}
+
+asyncFn()
+
+(Продолжение
+.then(value => console.log(value))
+.catch(error => console.log(error.message))
+
+Await - ожидать какого-то результата
+
+const asyncFn  = async () => {
+await <Promise> - Внутри асинхронных функций можно ожидать результатов промисов
+}
+
+asyncFn()
+
+Пример 3
+Ожидание результата await
+
+const timerPromise = () =>
+new Promise((resolve, reject) =>
+setTimeout(() => resolve(), 2000))
+
+const asyncFn = async () => {
+console.log('Timer starts')
+await timerPromise() - ожидает результата промиса, функция дальше не выполняется пока не получен результат промиса (исполнен/отклонен)
+console.log('Timer ended')
+}
+
+asyncFn()
+
+(Продолжение)
+
+const timerPromise = () =>
+new Promise((resolve, reject) =>
+setTimeout(() => resolve(), 2000))
+
+const asyncFn = async () => {
+console.log('Timer starts')
+const startTime = performance.now()
+await timerPromise()
+const endTime = performance.now()
+console.log('Timer ended', endTime - startTime)
+}
+
+asyncFn()
+
+
+Переход с промисов на Async/Await
+Пример 4
+
+const getData = (url) =>
+new Promise((resolve, reject) =>
+fetch(url)
+.then(response => response.json())
+.then(json => resolve(json))
+.catch(error => reject(error))
+)
+
+getData('https://jsonplaceholder.typicode.com/todos')
+.then(data => console.log(data))
+.catch(error => console.log(error.message))
+
+(Продолжение)
+
+const getData = async (url) => {
+const res = await fetch(url)
+const json = await res.json()
+return json
+}
+
+getData('https://jsonplaceholder.typicode.com/todos')
+.then(data => console.log(data))
+.catch(error => console.log(error.message))
+
+(Ещё продолжение)
+
+const getData = async (url) => {
+const res = await fetch(url)
+const json = await res.json()
+return json
+}
+
+const url = 'https://jsonplaceholder.typicode.com/todos'
+
+const data = await getData(url)
+
+Обработка ошибок в асинхронных функциях
+
+try {
+const data = await getData(url)
+console.log(data)
+} catch (error) {
+console.log(error.message)
+}
+
+Главное в Async/await
+
+1. Async/await - это синтаксическая надстройка над промисами
+2. await синтаксис возможен только внутри async функций
+3. async функция всегда возвращает Promise
+4. async функция ожидает инструкции await и не выполняет последующие инструкции
